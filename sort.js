@@ -75,6 +75,50 @@ function bubble_sort(arr){
 
 }
 
+//Merge sort
+function merge_sort(){
+
+  function merge(A,B){
+    var aPointer = 0;
+    var bPointer = 0;
+    var writePointer = 0;
+    var R = [];
+
+    while( aPointer < A.length && bPointer < B.length ) {
+      if( isLess(A[aPointer], B[pointerB]) ){
+        R[writePointer] = A[aPointer];
+        aPointer++;
+        writePointer++;
+      } else {
+        R[writePointer] = B[bPointer];
+        bPointer++;
+        writePointer++;
+      }  
+    }
+    
+    while( aPointer < A.length ) {
+      R[writePointer] = A[aPointer];
+      aPointer++;
+      writePointer++;
+    }
+
+    while( bPointer < B.length ) {
+      R[writePointer] = B[bPointer];
+      bPointer++;
+      writePointer++;
+    }
+
+    return R;
+  }
+
+  console.log(merge([3,4,5],[0,1,2]))
+  console.log(merge([8,9,15],[0,13,21]))
+  console.log(merge([3,4,5,7,8,9,11],[0,1,2,6,8,9,10]))
+
+}
+
+
+
 
 function run(N, func, show_arrays){
   compareRunned = 0;
