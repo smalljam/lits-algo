@@ -86,26 +86,18 @@ function merge_sort(){
 
     while( aPointer < A.length && bPointer < B.length ) {
       if( isLess(A[aPointer], B[bPointer]) ){
-        R[writePointer] = A[aPointer];
-        aPointer++;
-        writePointer++;
+        R[writePointer++] = A[aPointer++];
       } else {
-        R[writePointer] = B[bPointer];
-        bPointer++;
-        writePointer++;
+        R[writePointer++] = B[bPointer++];
       }  
     }
     
     while( aPointer < A.length ) {
-      R[writePointer] = A[aPointer];
-      aPointer++;
-      writePointer++;
+      R[writePointer++] = A[aPointer++];
     }
 
     while( bPointer < B.length ) {
-      R[writePointer] = B[bPointer];
-      bPointer++;
-      writePointer++;
+      R[writePointer++] = B[bPointer++];
     }
 
     return R;
