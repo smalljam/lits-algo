@@ -85,7 +85,7 @@ function merge_sort(){
     var R = [];
 
     while( aPointer < A.length && bPointer < B.length ) {
-      if( isLess(A[aPointer], B[pointerB]) ){
+      if( isLess(A[aPointer], B[bPointer]) ){
         R[writePointer] = A[aPointer];
         aPointer++;
         writePointer++;
@@ -118,7 +118,7 @@ function merge_sort(){
 }
 
 
-
+merge_sort();
 
 function run(N, func, show_arrays){
   compareRunned = 0;
@@ -151,9 +151,9 @@ function generateArray(N){
 
 
 // RUN
-run(13, selection_sort, true)
-run(13, insertion_sort, true)
-run(13, bubble_sort, true)
+// run(13, selection_sort, true)
+// run(13, insertion_sort, true)
+// run(13, bubble_sort, true)
 
 
 // run(100, insertion_sort)
