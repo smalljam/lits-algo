@@ -7,7 +7,7 @@ var ratings = data[1].split(' ');
 var lowIgnoreCount = data[2]*1;
 var highIgnoreCount = data[3]*1;
 
-console.log(lowIgnoreCount, highIgnoreCount)
+// console.log(lowIgnoreCount, highIgnoreCount, N)
 
 if(lowIgnoreCount + highIgnoreCount < N) {
 
@@ -18,7 +18,9 @@ if(lowIgnoreCount + highIgnoreCount < N) {
   for(var i = start; i < stop; i++){
     sum += sorted_rating[i]*1;
   }
-  console.log( Math.ceil(sum/(stop - start)) )
+  // console.log(sum)
+  // console.log(start, stop)
+  console.log( Math.floor(sum/(N-lowIgnoreCount-highIgnoreCount)) )
 
 } else {
   console.error('lowIgnoreCount (%s) + highIgnoreCount (%s) >= N (%s)', lowIgnoreCount, highIgnoreCount, N);
