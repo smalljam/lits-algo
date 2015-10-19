@@ -7,30 +7,36 @@ var prices = data[0].trim().split(' ');
 var sortedPrices = merge_sort(prices);
 var discount = (100-data[1].trim())/100;
 
-console.log(sortedPrices);
-console.log(sortedPrices.length);
+if( sortedPrices.length < 50 )
+	console.log('PRICES',sortedPrices);
+
+console.log('PRICES LENGTH',sortedPrices.length);
+console.log('DISCOUNT',discount);
 
 var skipFromStart = sortedPrices.length % 3;
 var totalGroups = (sortedPrices.length - skipFromStart)/3;
 
 var lastItem = totalGroups*2 + skipFromStart;
 
-console.log(skipFromStart);
-console.log(totalGroups);
-console.log(lastItem);
+console.log('ITEMS TO SKIP',skipFromStart);
+console.log('TOTAL GROUPS', totalGroups);
+console.log('LAST ITEM', lastItem);
 
-var total = sortedPrices[1]*1 + sortedPrices[0]*1;
+var total = 0;
+for(var i = 0; i < skipFromStart; i++){
+	total += sortedPrices[i]*1;
+}
 
 for( var i = skipFromStart; i <lastItem; i+=2 ) {
 	var first = sortedPrices[i]*1;
 	var second = sortedPrices[i+1]*1;
-	var third = sortedPrices.pop()*discount;
-	console.log(first, second, third);
-	total = total + first + second + third;
+	var third = sortedPrices.pop();
+	console.log('ITERATION '+i+':', first, second, third, third*discount);
+	total = total + first + second + third*discount;
 }
 
 var finalTotal = (Math.round(total*100)/100).toFixed(2);
-console.log(finalTotal)
+console.log('GRAND TOTAL', finalTotal)
 
 fs.writeFileSync('discnt.out', finalTotal);
 
