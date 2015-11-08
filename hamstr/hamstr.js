@@ -70,7 +70,7 @@ for( var i = C; i>0; i--){
 	}
 }
 
-fs.writeFileSync('discnt.out', RESULT);
+fs.writeFileSync('hamstr.out', RESULT);
 
 
 
