@@ -1,8 +1,8 @@
 #!/usr/local/bin/node
 
 var fs = require('fs');
-// var str = fs.readFileSync('lngpok.in', 'utf-8');
-var str = fs.readFileSync('/Users/anton/Google Drive/ADS-002/problems/lngpok/testcases/15.in', 'utf-8');
+var str = fs.readFileSync('lngpok.in', 'utf-8');
+// var str = fs.readFileSync('/Users/anton/Google Drive/ADS-002/problems/lngpok/testcases/15.in', 'utf-8');
 // TEST 1
 // var str = '0 10 15 50 0 14 9 12 40';
 // bestSeq 7
