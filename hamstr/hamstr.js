@@ -3,10 +3,10 @@
 // console.time('op')
 
 var fs = require('fs');
-// var data = fs.readFileSync('hamstr.in', 'utf-8').split("\n");
+var data = fs.readFileSync('hamstr.in', 'utf-8').split("\n");
 // var data = fs.readFileSync('10.in', 'utf-8').split("\n");
 
-var data = [0]
+// var data = [0]
 
 // console.log('file read')
 
