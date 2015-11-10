@@ -1,8 +1,8 @@
 #!/usr/local/bin/node
 
 var fs = require('fs');
-var str = fs.readFileSync('lngpok.in', 'utf-8');
-
+// var str = fs.readFileSync('lngpok.in', 'utf-8');
+var str = fs.readFileSync('/Users/anton/Google Drive/ADS-002/problems/lngpok/testcases/15.in', 'utf-8');
 // TEST 1
 // var str = '0 10 15 50 0 14 9 12 40';
 // bestSeq 7
@@ -85,7 +85,7 @@ if( cards.length > 0 ) {
         bestSeq = currSeq;
       currSeq = 1;
       usedJokers = 0;
-      i = lastI;
+      i = lastI || i;
       currCard = cards[i];
     }
   }
@@ -97,7 +97,7 @@ if( currSeq == bestSeq && usedJokers < jokers )
   bestSeq += (jokers - usedJokers)
 
 
-// console.log(data, cards, jokers)
+// console.log(cards.join(' '), jokers)
 // console.log(bestSeq)
 fs.writeFileSync('lngpok.out', bestSeq);
 
