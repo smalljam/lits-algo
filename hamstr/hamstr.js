@@ -1,7 +1,16 @@
 #!/usr/local/bin/node
 
+// console.time('op')
+
 var fs = require('fs');
-var data = fs.readFileSync('hamstr.in', 'utf-8').split("\n");
+// var data = fs.readFileSync('hamstr.in', 'utf-8').split("\n");
+// var data = fs.readFileSync('10.in', 'utf-8').split("\n");
+
+var data = [0]
+
+// console.log('file read')
+
+var memoisedMap = {};
 
 var S = data[0]*1;
 var C = data[1]*1;
@@ -10,6 +19,8 @@ for(var i = 0; i<C; i++){
 	var t = data[i+2].split(' ');
 	HC.push([t[0]*1, t[1]*1]);
 }
+
+// console.log('HC array', HC.length)
 
 var RESULT;
 
@@ -42,7 +53,7 @@ var RESULT;
 // 	[1,4],
 // 	[5,1]
 // ]
-//
+
 // RESULT 3
 
 
@@ -60,24 +71,73 @@ var RESULT;
 
 // TODO
 // more smart FOR :)
-for( var i = C; i>0; i--){
-	var all = totalsForAllHamsters(i-1);
-	var minimum = all[1].slice(0,i);
-	var t = total( minimum );
-	if( t <= S ){
-		RESULT = i;
-		i = 0;
-	}
+
+
+
+if( C > 99999 ){
+  var start = 0;
+  var end = C;
+
+  function middle(){
+    return Math.ceil(start + (end - start)/2);
+  }
+
+  var lastI;
+
+  function next(){
+    var i = middle();
+    if( i == lastI ){
+      // console.log('RETURN')
+      return;
+    }
+    lastI = i;
+    var t = proceed(i)
+    // console.log(start, end, i, lastI, t, S)
+    if( t <= S ){
+      RESULT = i;
+      start = i;
+      // console.log('INCREASE')
+      next();
+    } else {
+      end = i;
+      // console.log('DECREASE')
+      next();
+    }
+  }
+
+  next();
+}
+else{
+  for( var i = C; i>0; i--){
+    t = proceed(i - 1)
+    if( t <= S ){
+      RESULT = i;
+      i = 0;
+    }
+  }  
 }
 
-fs.writeFileSync('hamstr.out', RESULT);
+// console.timeEnd('op')
+
+fs.writeFileSync('hamstr.out', RESULT || 0);
 
 
 
 
 
-
-
+function proceed(count){
+  // console.time('op1')
+  // console.log(count, 'iteration')
+  var all = totalsForAllHamsters(count);
+  // console.log('totals', all.length)
+  var t = 0;
+  for(var j = 0; j<count; j++){
+    t += all[1][j];
+  }
+  // console.log(t, ' is minimum for ', j, ' of ',S)
+  // console.timeEnd('op1')
+  return t;
+}
 
 function total(arr){
 	var t = 0;
@@ -96,7 +156,20 @@ function totalsForAllHamsters(newC){
 }
 
 function totalForOneHamster(i, C){
-	return HC[i][0] + C*HC[i][1];
+  var a = HC[i][0];
+  var b = HC[i][1];
+	return memoised(a,b,C);
+}
+
+function memoised(a,b,c){
+  return memoisedMap[a+'_'+b+'_'+c] || addmemoise(a,b,c);
+  function addmemoise(a,b,c){
+    // console.log('')
+    // console.log('MEMOISE!!!!!')
+    // console.log('')
+    memoisedMap[a+'_'+b+'_'+c] = a + b*c;
+    return memoisedMap[a+'_'+b+'_'+c];
+  }
 }
 
 //Merge sort
