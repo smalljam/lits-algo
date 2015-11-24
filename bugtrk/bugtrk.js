@@ -14,6 +14,7 @@ var data = fs.readFileSync('bugtrk.in', 'utf-8');
 var q = data.split('\n')[0].split(' ');
 
 var r = run(q);
+
 // console.log(r);
 fs.writeFileSync('bugtrk.out', r);
 
