@@ -1,6 +1,7 @@
 #!/usr/local/bin/node
 
 var ABC = { a:0, b:1, c:2, d:3, e:4, f:5, g:6, h:7, i:8, j:9, k:10, l:11, m:12, n:13, o:14, p:15, q:16, r:17, s:18, t:19, u:20, v:21, w:22, x:23, y:24, z:25 };
+var keysMap = {};
 
 // var questions = [
 //   ['4\nacdf\nbcde\nbe\nf', 1],
@@ -23,11 +24,16 @@ function run(str) {
   var keysOther = [];
   for (var i = 0; i < N; i++) {
     var k = arr[i + 1];
-    var a = keyToArray(k);
-    if (a[0] == 1) {
-      keysA.push(a);
-    }else {
-      keysOther.push(a);
+    if (k in keysMap) {
+      keysMap[k]++;
+    } else {
+      keysMap[k] = 1;
+      var a = keyToArray(k);
+      if (a[0] == 1) {
+        keysA.push(a);
+      }else {
+        keysOther.push(a);
+      }
     }
   }
 
@@ -54,7 +60,7 @@ function run(str) {
       }
 
       if (isValid) {
-        foundPairs++;
+        foundPairs += keysMap[first[26]] * keysMap[second[26]];
       }
     }
   }
@@ -67,6 +73,8 @@ function keyToArray(key) {
   for (var i = 0; i < key.length; i++) {
     a[ ABC[key[i]] ] = 1;
   }
+
+  a.push(key);
 
   return a;
 }
