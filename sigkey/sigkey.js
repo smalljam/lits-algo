@@ -37,26 +37,24 @@ function run(str) {
       var first = keysA[y];
       var second = keysOther[j];
 
-      if ((first[26] + second[26]) < 27) {
-        var isTail = false;
-        var isValid = true;
+      var isTail = false;
+      var isValid = true;
 
-        for (var s = 1; s < 26; s++) {
-          var q = first[s] + second[s];
-          if (q == 1 && isTail) {
-            isValid = false;
-            s = 26;
-          } else if (q === 0) {
-            isTail = true;
-          } else if (q == 2) {
-            isValid = false;
-            s = 26;
-          }
+      for (var s = 1; s < 26; s++) {
+        var q = first[s] + second[s];
+        if (q == 1 && isTail) {
+          isValid = false;
+          s = 26;
+        } else if (q === 0) {
+          isTail = true;
+        } else if (q == 2) {
+          isValid = false;
+          s = 26;
         }
+      }
 
-        if (isValid) {
-          foundPairs++;
-        }
+      if (isValid) {
+        foundPairs++;
       }
     }
   }
@@ -66,13 +64,9 @@ function run(str) {
 
 function keyToArray(key) {
   var a = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  var length = 0;
   for (var i = 0; i < key.length; i++) {
     a[ ABC[key[i]] ] = 1;
-    length++;
   }
-
-  a.push(length);
 
   return a;
 }
